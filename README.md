@@ -1,4 +1,4 @@
-# port-relay-bashscript
+# Port-relay-bashscript
 A bash script for port relay.
 
 # One-button to run script  
