@@ -7,13 +7,13 @@ echo "Only same port can use this bashscript."
 echo -n "local ip:" ; read localip && echo -n "remote ip:" ; read remoteip
 echo "mode 0 is single port,mode 1 is multiple port."
 echo -n "mode:" ; read mode
-if [ "$mode" == "0" ]; then
+if [ "$mode" == '0' ]; then
   echo -n "port:" ; read port
   iptables -t nat -A PREROUTING -p tcp --dport $port -j DNAT --to-destination $remoteip:$port
   iptables -t nat -A PREROUTING -p udp --dport $port -j DNAT --to-destination $remoteip:$port
   iptables -t nat -A POSTROUTING -p udp -d $remoteip --dport $port -j SNAT --to-source $localip
   iptables -t nat -A POSTROUTING -p tcp -d $remoteip --dport $port -j SNAT --to-source $localip
-elif [ "$mode" == "1" ]; then
+elif [ "$mode" == '1' ]; then
   echo -n "start port:" ; read startport && echo -n "end port:" ; read endport
   iptables -t nat -A PREROUTING -p tcp -m tcp --dport $startport:$endport -j DNAT --to-destination $remoteip:$startport-$endport
   iptables -t nat -A PREROUTING -p udp -m udp --dport $startport:$endport -j DNAT --to-destination $remoteip:$startport-$endport
