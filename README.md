@@ -8,7 +8,7 @@ For Debian/Ubuntu:
 bash <(curl -s -S -L https://raw.githubusercontent.com/siriusfinex/port-relay-bashscript/master/debian-port-delay.sh)
 ```
 
-# Only relay single same port and multiple same ports.
+## Only relay single same port and multiple same ports.
 "mode 0" is single port relay mode,can relay only 1 port;  
 "mode 1" is multiple port relay mode,can realy a range of ports；   
 but,all of this relay only the same port between localhost and remote host.
