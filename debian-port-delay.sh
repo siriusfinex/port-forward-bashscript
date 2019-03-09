@@ -1,7 +1,6 @@
 #! /bin/bash
 #enable firewall ipv4 port relay
-echo -e "net.ipv4.ip_forward=1" >> /etc/sysctl.conf ;
-sysctl -p
+sed -n '/^net.ipv4.ip_forward=1/'p /etc/sysctl.conf || ( echo -e "net.ipv4.ip_forward=1" >> /etc/sysctl.conf ; sysctl -p )
 
 #choice relay mode and setting port relay
 echo "Only same port can use this bashscript."
