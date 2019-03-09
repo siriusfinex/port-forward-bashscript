@@ -3,7 +3,10 @@ A bash script for port relay.
 
 # One-button to run script  
 For Debian/Ubuntu:  
+
+```
 bash <(curl -s -S -L https://raw.githubusercontent.com/siriusfinex/port-relay-bashscript/master/debian-port-delay.sh)
+```
 
 # Only relay single same port and multiple same ports.
 "mode 0" is single port relay mode,can relay only 1 port;  
