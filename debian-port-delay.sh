@@ -3,7 +3,7 @@
 echo -e "net.ipv4.ip_forward=1" >> /etc/sysctl.conf ;
 sysctl -p
 
-#get mode
+#choice relay mode and setting port relay
 echo "Only same port can use this bashscript."
 echo -n "local ip:" ; read localip && echo -n "remote ip:" ; read remoteip
 echo "mode 0 is single port,mode 1 is multiple port."
@@ -24,7 +24,7 @@ else
   echo "Please read the tips"
 fi
 
-#save iptables rules
+#save port relay rules to iptables
 iptables-save > /etc/iptables.up.rules
 
 #setting iptables autostart
