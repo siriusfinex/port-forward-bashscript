@@ -7,9 +7,9 @@ mode 0 is single port relay mode,can relay only 1 port;mode 1 is multiple port r
 only 1 port can been relay
 ## For multiple port mode
 many port can been relay.
-## check out iptables NAT rules
+## Check iptables NAT rules
 iptables -t nat -vnL POSTROUTING
 iptables -t nat -vnL PREROUTING
-## delet iptables NAT rules
+## Delete iptables NAT rules
 iptables -t nat -D POSTROUTING 1
 iptables -t nat -D PREROUTING 1
