@@ -24,6 +24,7 @@ else
   echo "Failed,please read the tips,the mode value only 0 or 1"
 fi
 
+#check iptables history port forward rules and add new port forward.
 iptables -t nat -vnL PREROUTING | grep "tcp" | grep "$remote_ip" | grep "$port1"  | grep "$port2"
 if [ $? -eq 0 ] ; then
  	echo "yes"
