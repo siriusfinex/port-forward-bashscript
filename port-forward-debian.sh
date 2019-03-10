@@ -1,6 +1,6 @@
 #! /bin/bash
 #enable net.ipv4.ip_forward
-sed -n '/^net.ipv4.ip_forward=1/'p /etc/sysctl.conf | grep "net.ipv4.ip_forward=1"
+sed -n '/^net.ipv4.ip_forward=1/'p /etc/sysctl.conf | grep -q "net.ipv4.ip_forward=1"
 if [ $? -eq 0 ]; then
     echo "yes"
 else
@@ -25,28 +25,28 @@ else
 fi
 
 #check iptables history port forward rules and add new port forward.
-iptables -t nat -vnL PREROUTING | grep "tcp" | grep "$remote_ip" | grep "$port1"  | grep "$port2"
+iptables -t nat -vnL PREROUTING | grep "tcp" | grep "$remote_ip" | grep "$port1"  | grep -q "$port2"
 if [ $? -eq 0 ] ; then
  	echo "yes"
 else
 	iptables -t nat -A PREROUTING -p tcp -m tcp --dport $port1 -j DNAT --to-destination $remote_ip:$port2
 fi
 
-iptables -t nat -vnL PREROUTING | grep "udp" | grep "$remote_ip" | grep "$port1" | grep "$port2"
+iptables -t nat -vnL PREROUTING | grep "udp" | grep "$remote_ip" | grep "$port1" | grep -q "$port2"
 if [ $? -eq 0 ] ; then
  	echo "yes"
 else
 	iptables -t nat -A PREROUTING -p udp -m udp --dport $port1 -j DNAT --to-destination $remote_ip:$port2
 fi
 
-iptables -t nat -vnL POSTROUTING | grep "tcp" | grep "$port1" | grep "$local_ip"
+iptables -t nat -vnL POSTROUTING | grep "tcp" | grep "$port1" | grep -q "$local_ip"
 if [ $? -eq 0 ] ; then
  	echo "yes"
 else
 	iptables -t nat -A POSTROUTING -p tcp -d $remote_ip --dport $port1 -j SNAT --to-source $local_ip
 fi
 
-iptables -t nat -vnL POSTROUTING | grep "udp" | grep "$port1" | grep "$local_ip"
+iptables -t nat -vnL POSTROUTING | grep "udp" | grep "$port1" | grep -q "$local_ip"
 if [ $? -eq 0 ] ; then
  	echo "yes"
 else
