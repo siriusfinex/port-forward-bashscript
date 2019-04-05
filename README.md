@@ -5,7 +5,7 @@ A bash script for port relay.
 For Debian/Ubuntu:  
 
 ```
-wget -qO- https://raw.githubusercontent.com/siriusfinex/port-forward-bashscript/master/port-forward-debian.sh | bash
+bash <(curl -s -S -L  "https://raw.githubusercontent.com/siriusfinex/port-forward-bashscript/master/port-forward-debian.sh")
 ```
 
 ## Only relay single same port and multiple same ports.
