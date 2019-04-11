@@ -15,7 +15,7 @@ local_ip=$(ip -o -4 addr list | grep -Ev '\s(docker|lo)' | awk '{print $4}' | cu
 if [ "x${extip}" = "x" ]; then
   local_ip=$(ip -o -4 addr list | grep -Ev '\s(docker|lo)' | awk '{print $4}' | cut -d/ -f1 )
 fi
-echo local_ip: $local_ip
+echo "local ip: $local_ip"
 
 #echo -n "local ip:" ; read local_ip
 echo -n "remote ip:" ; read remote_ip
