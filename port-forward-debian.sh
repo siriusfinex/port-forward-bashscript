@@ -9,7 +9,16 @@ fi
 
 #choice relay mode and setting port forward
 echo "Only same port can use this bashscript."
-echo -n "local ip:" ; read local_ip && echo -n "remote ip:" ; read remote_ip
+
+#get local_ip
+local_ip=$(ip -o -4 addr list | grep -Ev '\s(docker|lo)' | awk '{print $4}' | cut -d/ -f1 | grep -Ev '(^127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$)|(^10\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$)|(^172\.1[6-9]{1}[0-9]{0,1}\.[0-9]{1,3}\.[0-9]{1,3}$)|(^172\.2[0-9]{1}[0-9]{0,1}\.[0-9]{1,3}\.[0-9]{1,3}$)|(^172\.3[0-1]{1}[0-9]{0,1}\.[0-9]{1,3}\.[0-9]{1,3}$)|(^192\.168\.[0-9]{1,3}\.[0-9]{1,3}$)')
+if [ "x${extip}" = "x" ]; then
+  local_ip=$(ip -o -4 addr list | grep -Ev '\s(docker|lo)' | awk '{print $4}' | cut -d/ -f1 )
+fi
+echo local_ip: $local_ip
+
+#echo -n "local ip:" ; read local_ip
+echo -n "remote ip:" ; read remote_ip
 echo "mode 0 is single port forward;mode 1 is multiple port forward."
 echo -n "mode:" ; read mode
 if [ "$mode" == '0' ]; then
